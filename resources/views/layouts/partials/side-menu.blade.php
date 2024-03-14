@@ -57,31 +57,51 @@
             </ul>
         </li>
 
+
+        {{--Quản lý khách hàng--}}
+
         <li>
             <a href="javascript:;" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
                 <div class="side-menu__title">
-                    Menu Layout
+                    Quản lý khách hàng
                     <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                 </div>
             </a>
             <ul class="">
                 <li>
-                    <a href="{{asset('#')}}" class="side-menu">
+                    <a href="{{ route('customers.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Side Menu </div>
+                        <div class="side-menu__title"> Danh sách </div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{asset('#')}}" class="side-menu">
+                    <a href="{{route('customers-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Simple Menu </div>
+                        <div class="side-menu__title"> Thùng rác</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                <div class="side-menu__title">
+                    Quản lý danh mục
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('categories.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Danh sách</div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{asset('#')}}" class="side-menu">
+                    <a href="{{route('categories-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Top Menu </div>
+                        <div class="side-menu__title"> Thùng rác </div>
                     </a>
                 </li>
             </ul>
