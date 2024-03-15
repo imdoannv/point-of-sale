@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
+use App\Http\Requests\ProductUnitRequest;
+use App\Models\ProductUnit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class CategoryController extends Controller
+
+class ProductUnitController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Category::query()->latest()->paginate(8);
-        return view('categories.index', compact('data'));
+        $data = ProductUnit::query()->latest()->paginate(8);
+        return view('product-units.index',compact('data'));
     }
 
     /**
@@ -23,26 +25,23 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('product-units.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(ProductUnitRequest $request)
     {
         try {
-            $model = new Category();
+            $model = new ProductUnit();
             $model->fill($request->all());
-            if ($request->hasFile('image')) {
-                $model->image=upload_file('categories',$request->file('image'));
-            }
             $model->save();
-            toastr()->success('Thêm danh mục thành công!','Thành công');
-            return to_route('categories.index');
+            toastr()->success('Thêm đơn vị tài khoản thành công!','Thành công');
+            return to_route('product-units.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Thêm danh mục thất bại!','Thất bại');
+            toastr()->error('Thêm đơn vị tài khoản thất bại!','Thất bại');
             return back();
         }
     }
@@ -50,7 +49,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(ProductUnit $productUnit)
     {
         //
     }
@@ -58,35 +57,26 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string  $id)
+    public function edit(string $id)
     {
-        $data = Category::findOrFail($id);
-        return view('categories.edit',compact('data'));
+        $data = ProductUnit::findOrFail($id);
+        return view('product-units.edit',compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, string $id)
+    public function update(ProductUnitRequest $request, string $id)
     {
-
         try {
-            $model = Category::findOrFail($id);
+            $model = ProductUnit::findOrFail($id);
             $model->fill($request->all());
-            if($request->has('new_image') ){
-                $model->avatar=upload_file(OBJECT_USER,$request->file('new_image'));
-            }else{
-                $model->image=$request->old_image;
-            }
             $model->save();
-            if($request->hasFile('new_image')){
-                delete_file($request->old_image);
-            }
-            toastr()->success('Sửa thông tin danh mục thành công!','Thành công');
-            return to_route('categories.index');
+            toastr()->success('Sửa đơn vị sản phẩm thành công!','Thành công');
+            return to_route('product-units.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Sửa thông tin danh mục thất bại!','Thất Bại');
+            toastr()->error('Sửa đơn vị sản phẩm thất bại!','Thất Bại');
             return back();
         }
     }
@@ -94,10 +84,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category) //Xóa mềm
+    public function destroy(ProductUnit $productUnit) //Xóa mềm
     {
         try {
-            $category->delete();
+            $productUnit->delete();
             toastr()->success('Chuyển danh mục vào kho lưu trữ thành công!','Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
@@ -109,8 +99,8 @@ class CategoryController extends Controller
 
     public function deleted(){ // Thùng rác
         try {
-            $data = Category::onlyTrashed()->paginate(8);
-            return view('categories.delete', compact('data'));
+            $data = ProductUnit::onlyTrashed()->paginate(8);
+            return view('product-units.delete', compact('data'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back();
@@ -120,27 +110,27 @@ class CategoryController extends Controller
     public function permanentlyDelete($id)
     {
         try {
-            $data = Category::where('id', $id);
+            $data = ProductUnit::where('id', $id);
             $data->forceDelete();
-            toastr()->success('Xóa danh mục thành công!','Thành công');
+            toastr()->success('Xóa đơn vị sản phẩm thành công!','Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Xóa danh mục thất bại!','Thất bại');
+            toastr()->error('Xóa đơn vị sản phẩm thất bại!','Thất bại');
             return back();
         }
     }
 
     public function restore($id){
         try {
-            $data = Category::onlyTrashed()->find($id);
+            $data = ProductUnit::onlyTrashed()->find($id);
             $data->restore();
-            toastr()->success('Khôi phục danh mục thành công!','Thành công');
+            toastr()->success('Khôi phục đơn vị sản phẩm thành công!','Thành công');
             return redirect()->back();
         }
         catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Khôi phục danh mục thất bại!','Thất bại');
+            toastr()->error('Khôi phục đơn vị sản phẩm thất bại!','Thất bại');
             return back();
         }
     }

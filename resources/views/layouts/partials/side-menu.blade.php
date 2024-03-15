@@ -35,7 +35,7 @@
 
         <li>
             <a href="javascript:;" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
                 <div class="side-menu__title">
                     Quản lý nhân viên
                     <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
@@ -83,6 +83,8 @@
                 </li>
             </ul>
         </li>
+
+        {{--Quản lý danh mục--}}
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
@@ -106,6 +108,83 @@
                 </li>
             </ul>
         </li>
+
+
+        {{--Quản lý đơn vị sản phẩm--}}
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
+                <div class="side-menu__title">
+                    Quản lý đơn vị sản phẩm
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('product-units.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Danh sách</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('product-units-deleted') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title"> Thùng rác </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{--Quản lý tầng--}}
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
+                <div class="side-menu__title">
+                    Quản lý tầng
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('floors.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Danh sách</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('floors-deleted') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title"> Thùng rác </div>
+                    </a>
+                </li>
+            </ul>
+
+        {{--Quản lý mã giảm giá--}}
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
+                <div class="side-menu__title">
+                    Quản lý mã giảm giá
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('discounts.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Danh sách</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('discounts-deleted') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title"> Thùng rác </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
@@ -127,99 +206,25 @@
                         <div class="side-menu__title"> Add Product </div>
                     </a>
                 </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title">
-                            Products
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="{{asset('#')}}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                <div class="side-menu__title">Product List</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{asset('#')}}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                <div class="side-menu__title">Product Grid</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title">
-                            Transactions
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="{{asset('#')}}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                <div class="side-menu__title">Transaction List</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{asset('#')}}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                <div class="side-menu__title">Transaction Detail</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title">
-                            Sellers
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="{{asset('#')}}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                <div class="side-menu__title">Seller List</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{asset('#')}}" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                <div class="side-menu__title">Seller Detail</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{asset('#')}}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Reviews </div>
-                    </a>
-                </li>
             </ul>
         </li>
+
         <li>
             <a href="{{asset('#')}}" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
-                <div class="side-menu__title"> Inbox </div>
+                <div class="side-menu__title"> Quản lý đơn vị sản phẩm </div>
             </a>
         </li>
         <li>
-            <a href="{{asset('#')}}" class="side-menu">
+            <a href="{{route('product-units.index') }}" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                <div class="side-menu__title"> File Manager </div>
+                <div class="side-menu__title"> Danh sách </div>
             </a>
         </li>
         <li>
-            <a href="{{asset('#')}}" class="side-menu">
+            <a href="{{route('product-units-deleted') }}" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                <div class="side-menu__title"> Point of Sale </div>
+                <div class="side-menu__title"> Thùng rác </div>
             </a>
         </li>
         <li>
