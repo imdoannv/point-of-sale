@@ -19,13 +19,13 @@
                 <li>
                     <a href="{{ route('users.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Danh sách </div>
+                        <div class="side-menu__title">Danh sách</div>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('users-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác</div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -45,13 +45,13 @@
                 <li>
                     <a href="{{ route('employees.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Danh sách </div>
+                        <div class="side-menu__title">Danh sách</div>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('employees-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác</div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -72,13 +72,13 @@
                 <li>
                     <a href="{{ route('customers.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Danh sách </div>
+                        <div class="side-menu__title">Danh sách</div>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('customers-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác</div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -103,7 +103,7 @@
                 <li>
                     <a href="{{route('categories-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác </div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -129,7 +129,58 @@
                 <li>
                     <a href="{{route('product-units-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác </div>
+                        <div class="side-menu__title">Thùng rác</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+        {{--Quản lý kho--}}
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
+                <div class="side-menu__title">
+                    Quản lý kho
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('warehouses.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Danh sách</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('warehouses-deleted') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Thùng rác</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{--Quản lý sản phẩm--}}
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
+                <div class="side-menu__title">
+                    Quản lý sản phẩm
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('products.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Danh sách</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('products-deleted') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -154,7 +205,7 @@
                 <li>
                     <a href="{{route('floors-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác </div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -178,7 +229,7 @@
                 <li>
                     <a href="{{route('discounts-deleted') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title"> Thùng rác </div>
+                        <div class="side-menu__title">Thùng rác</div>
                     </a>
                 </li>
             </ul>
@@ -218,13 +269,13 @@
         <li>
             <a href="{{route('product-units.index') }}" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                <div class="side-menu__title"> Danh sách </div>
+                <div class="side-menu__title">Danh sách</div>
             </a>
         </li>
         <li>
             <a href="{{route('product-units-deleted') }}" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                <div class="side-menu__title"> Thùng rác </div>
+                <div class="side-menu__title">Thùng rác</div>
             </a>
         </li>
         <li>

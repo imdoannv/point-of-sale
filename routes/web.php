@@ -7,6 +7,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductUnitController;
+use App\Http\Controllers\WareHouseController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\DiscountController;
 /*
@@ -64,6 +66,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('product-units-permanently/{id}', [ProductUnitController::class, 'permanentlyDelete'])->name('product-units-permanently-delete');
     Route::get('product-units-restore/{id}', [ProductUnitController::class, 'restore'])->name('product-units-restore');
 
+    // Quản lý kho
+    Route::resource('warehouses', WareHouseController::class);
+    Route::get('warehouses-deleted', [WareHouseController::class, 'deleted'])->name('warehouses-deleted');
+    Route::delete('warehouses-permanently/{id}', [WareHouseController::class, 'permanentlyDelete'])->name('warehouses-permanently-delete');
+    Route::get('warehouses-restore/{id}', [WareHouseController::class, 'restore'])->name('warehouses-restore');
+
+    // Quản lý sản phẩm
+    Route::resource('products', ProductController::class);
+    Route::get('products-deleted', [ProductController::class, 'deleted'])->name('products-deleted');
+    Route::delete('products-permanently/{id}', [ProductController::class, 'permanentlyDelete'])->name('products-permanently-delete');
+    Route::get('products-restore/{id}', [ProductController::class, 'restore'])->name('products-restore');
+
     // Quản lý tầng
     Route::resource('floors', FloorController::class);
     Route::get('floors-deleted', [FloorController::class, 'deleted'])->name('floors-deleted');
@@ -75,6 +89,8 @@ Route::middleware('auth')->group(function () {
     Route::get('discounts-deleted', [DiscountController::class, 'deleted'])->name('discounts-deleted');
     Route::delete('discounts-permanently/{id}', [DiscountController::class, 'permanentlyDelete'])->name('discounts-permanently-delete');
     Route::get('discounts-restore/{id}', [DiscountController::class, 'restore'])->name('discounts-restore');
+
+
 });
 
 require __DIR__.'/auth.php';

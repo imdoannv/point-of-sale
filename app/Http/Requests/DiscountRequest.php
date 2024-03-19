@@ -26,7 +26,7 @@ class DiscountRequest extends FormRequest
             'name' => 'required|min:5|unique:discounts,name,' . $this->id,
             'type' => 'required',
             'value' => 'required|integer',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:1',
             'description' => 'required|min:1|max:255',
             'start_date' => 'required|date|after_or_equal:' . Carbon::now()->toDateTimeString(),
             'end_date' => ['required', 'after_or_equal:start_date',],
@@ -51,6 +51,7 @@ class DiscountRequest extends FormRequest
 
             'quantity.required' => 'Số lượng phải bắt buộc nhập',
             'quantity.integer' => 'Số lượng phải là số',
+            'quantity.min' => 'Mã giảm giá phải từ :min kí tự trở lên',
 
             'start_date.required' => 'Thời gian bắt đầu phải bắt buộc nhập',
             'start_date.after_or_equal' => 'Thời gian bắt đầu phải lớn hơn thời gian hiện tại',
