@@ -16,4 +16,8 @@ class Floor extends Model
     ];
 
     public $timestamps = true;
+
+    public function tables(){
+        return $this->hasMany(Table::class, 'floor_id','id');
+    }
 }

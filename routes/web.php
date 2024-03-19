@@ -11,6 +11,9 @@ use App\Http\Controllers\WareHouseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\BillDetailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,11 +87,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('floors-permanently/{id}', [FloorController::class, 'permanentlyDelete'])->name('floors-permanently-delete');
     Route::get('floors-restore/{id}', [FloorController::class, 'restore'])->name('floors-restore');
 
+    // Quản lý bàn
+    Route::resource('tables', TableController::class);
+    Route::get('tables-deleted', [TableController::class, 'deleted'])->name('tables-deleted');
+    Route::delete('tables-permanently/{id}', [TableController::class, 'permanentlyDelete'])->name('tables-permanently-delete');
+    Route::get('tables-restore/{id}', [TableController::class, 'restore'])->name('tables-restore');
+
     // Quản lý mã giảm giá
     Route::resource('discounts', DiscountController::class);
     Route::get('discounts-deleted', [DiscountController::class, 'deleted'])->name('discounts-deleted');
     Route::delete('discounts-permanently/{id}', [DiscountController::class, 'permanentlyDelete'])->name('discounts-permanently-delete');
     Route::get('discounts-restore/{id}', [DiscountController::class, 'restore'])->name('discounts-restore');
+
+    // Quản lý bill
+    Route::resource('bills', \App\Http\Controllers\BillController::class);
+    Route::resource('bill-details', BillDetailController::class);
 
 
 });

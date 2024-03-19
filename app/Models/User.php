@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Employee::class, 'user_id', 'id');
     }
+
+    public function  bills(){
+        return $this->hasMany(Bill::class,'user_id','id');
+    }
 }

@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Employee;
 use App\Models\Product;
 use App\Models\ProductUnit;
-use App\Models\WareHouse;
+use App\Models\Warehouse;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $product_units = ProductUnit::all();
-        $warehouses = WareHouse::all();
+        $warehouses = Warehouse::all();
         $data = Product::query()->latest()->paginate(8);
         return view('products.index', compact('data','categories','product_units','warehouses'));
     }
@@ -33,7 +33,7 @@ class ProductController extends Controller
     {
         $product_units = ProductUnit::all();
         $categories = Category::all();
-        $warehouses = WareHouse::all();
+        $warehouses = Warehouse::all();
 
         return view('products.create',compact('product_units', 'categories','warehouses'));
     }
@@ -75,7 +75,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $product_units = ProductUnit::all();
         $data= Product::query()->findOrFail($id);
-        $warehouses = WareHouse::all();
+        $warehouses = Warehouse::all();
 
         return view('products.edit',compact('data','categories','product_units','warehouses'));
     }

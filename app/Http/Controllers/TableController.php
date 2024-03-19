@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\WareHouseRequest;
-use App\Models\Warehouse;
+use App\Http\Requests\TableRequest;
+use App\Models\Floor;
+use App\Models\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class WareHouseController extends Controller
+class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Warehouse::query()->latest()->paginate(8);
-        return view('warehouses.index', compact('data'));
+        $floors = Floor::all();
+        $data = Table::query()->latest()->paginate(8);
+        return view('tables.index', compact('data','floors'));
     }
 
     /**
@@ -25,23 +26,24 @@ class WareHouseController extends Controller
      */
     public function create()
     {
-        return view('warehouses.create');
+        $floors = Floor::all();
+        return view('tables.create',compact('floors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(WareHouseRequest $request)
+    public function store(TableRequest $request)
     {
         try {
-            $model = new Warehouse();
+            $model = new Table();
             $model->fill($request->all());
             $model->save();
-            toastr()->success('Thêm kho thành công!','Thành công');
-            return to_route('warehouses.index');
+            toastr()->success('Thêm bàn mới thành công!','Thành công');
+            return to_route('tables.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Thêm kho thất bại!','Thất bại');
+            toastr()->error('Thêm bàn mới thất bại!','Thất bại');
             return back();
         }
     }
@@ -49,7 +51,7 @@ class WareHouseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Warehouse $wareHouse)
+    public function show(Table $table)
     {
         //
     }
@@ -59,24 +61,26 @@ class WareHouseController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Warehouse::findOrFail($id);
-        return view('warehouses.edit',compact('data'));
+        $data= Table::query()->findOrFail($id);
+        $floors = Floor::all();
+
+        return view('tables.edit',compact('data','floors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(WareHouseRequest $request, string $id)
+    public function update(TableRequest $request, string $id)
     {
         try {
-            $model = Warehouse::findOrFail($id);
+            $model = Table::findOrFail($id);
             $model->fill($request->all());
             $model->save();
-            toastr()->success('Sửa thông tin kho thành công!','Thành công');
-            return to_route('warehouses.index');
+            toastr()->success('Sửa thông tin bàn thành công!','Thành công');
+            return to_route('tables.index');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Sửa thông tin kho thất bại!','Thất Bi');
+            toastr()->error('Sửa thông tin bàn thất bại!','Thất Bại');
             return back();
         }
     }
@@ -84,23 +88,22 @@ class WareHouseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Warehouse $warehouse)
+    public function destroy(Table $table)
     {
         try {
-            $warehouse->delete();
-            toastr()->success('Chuyển kho này vào kho lưu trữ thành công!','Thành công');
+            $table->delete();
+            toastr()->success('Chuyển bàn vào kho lưu trữ thành công!','Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Xóa kho này thất bại!', 'Thất bại');
+            toastr()->error('Xóa bàn thất bại!', 'Thất bại');
             return back();
         }
     }
-
     public function deleted(){ // Thùng rác
         try {
-            $data = Warehouse::onlyTrashed()->paginate(8);
-            return view('warehouses.delete', compact('data'));
+            $data = Table::onlyTrashed()->paginate(8);
+            return view('tables.delete', compact('data'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back();
@@ -110,27 +113,27 @@ class WareHouseController extends Controller
     public function permanentlyDelete($id)
     {
         try {
-            $data = Warehouse::where('id', $id);
+            $data = Table::where('id', $id);
             $data->forceDelete();
-            toastr()->success('Xóa kho thành công!','Thành công');
+            toastr()->success('Xóa bàn thành công!','Thành công');
             return redirect()->back();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Xóa kho thất bại!','Thất bại');
+            toastr()->error('Xóa bàn thất bại!','Thất bại');
             return back();
         }
     }
 
     public function restore($id){
         try {
-            $data = Warehouse::onlyTrashed()->find($id);
+            $data = Table::onlyTrashed()->find($id);
             $data->restore();
-            toastr()->success('Khôi phục kho thành công!','Thành công');
+            toastr()->success('Khôi phục bàn thành công!','Thành công');
             return redirect()->back();
         }
         catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            toastr()->error('Khôi phục kho thất bại!','Thất bại');
+            toastr()->error('Khôi phục bàn thất bại!','Thất bại');
             return back();
         }
     }

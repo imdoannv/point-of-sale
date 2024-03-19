@@ -17,4 +17,7 @@ class Customer extends Model
     ];
 
     public $timestamp = true;
+    public function bills(){
+        $this->hasMany(Bill::class, 'customer_id','id');
+    }
 }
