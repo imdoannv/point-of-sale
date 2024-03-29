@@ -35,8 +35,8 @@ class Product extends Model
         return $this->belongsTo(Warehouse::class,'warehouse_id','id');
     }
 
-    public function bill_details(){
-        return $this-> hasMany(BillDetail::class,'bill_id','id');
+    public function order_details(){
+        return $this-> hasMany(OrderDetail::class,'product_id','id');
     }
 
 }

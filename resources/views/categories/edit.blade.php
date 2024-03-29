@@ -32,9 +32,9 @@
                                         @enderror
 
                                         <div class="mb-3">
-                                            <label for="simpleinput" class="form-label">Cập nhật ảnh đại diện</label>
+                                            <label for="simpleinput" class="form-label">Cập nhật ảnh danh mục</label>
                                             <input type="file" class="form-control" accept="image/*" id="image-input"
-                                                   name="new_avatar">
+                                                   name="new_image">
                                         </div>
                                         @if ($data->image)
                                             <input type="text" value="{{ $data->image }}" name="old_image" hidden>

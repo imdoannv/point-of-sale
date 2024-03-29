@@ -74,7 +74,7 @@ class CategoryController extends Controller
             $model = Category::findOrFail($id);
             $model->fill($request->all());
             if($request->has('new_image') ){
-                $model->avatar=upload_file(OBJECT_USER,$request->file('new_image'));
+                $model->avatar=upload_file('categories',$request->file('new_image'));
             }else{
                 $model->image=$request->old_image;
             }

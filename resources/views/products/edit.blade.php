@@ -15,8 +15,6 @@
                                 @csrf
                                 @method('put')
                                 <input type='hidden' value="{{ $data->id }}" name="id">
-                                <input type='hidden' value="{{ $data->password }}" name="password">
-                                <input type='hidden' value="{{ $data->role }}" name="role">
                                 <div class="row">
 
                                     <div class="col-lg-6">

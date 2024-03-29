@@ -12,17 +12,14 @@ class Bill extends Model
     protected $fillable = [
         'total_price',
         'status',
-        'table_id',
         'customer_id',
+        'order_id',
         'user_id',
         'discount_id'
     ];
 
     public $timestamps = true;
 
-    public function tables(){
-        return $this-> belongsTo(Table::class, 'table_id','id');
-    }
     public function customers(){
         return $this-> belongsTo(Customer::class, 'customer_id','id');
     }
@@ -33,7 +30,7 @@ class Bill extends Model
         return $this-> belongsTo(Discount::class, 'discount_id','id');
     }
 
-    public function bill_details(){
-        return $this-> hasMany(BillDetail::class,'bill_id','id');
+    public function orders(){
+        return $this-> belongsTo(Order::class,'order_id','id');
     }
 }

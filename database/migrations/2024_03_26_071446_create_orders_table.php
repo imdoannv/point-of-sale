@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bill_details', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
             $table->integer('price');
-            $table->unsignedBigInteger('bill_id')->unsigned();
-            $table->foreign('bill_id')->references('id')->on('bills');
-            $table->unsignedBigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('bills');
+            $table->enum('status', ['paid','cancelled','pending','shipped','refunded'])->default('pending');
+            $table->unsignedBigInteger('table_id')->unsigned();
+            $table->foreign('table_id')->references('id')->on('tables');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bill_details');
+        Schema::dropIfExists('orders');
     }
 };

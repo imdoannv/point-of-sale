@@ -14,15 +14,14 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->integer('total_price');
-            $table->enum('status', ['paid','cancelled','pending','shipped','refunded'])->default('pending');
-            $table->unsignedBigInteger('table_id')->unsigned();
-            $table->foreign('table_id')->references('id')->on('tables');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('customers');
             $table->unsignedBigInteger('discount_id')->unsigned();
             $table->foreign('discount_id')->references('id')->on('discounts');
+            $table->unsignedBigInteger('order_id')->unsigned();
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
     <!-- BEGIN: Breadcrumb -->
     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Application</a></li>
+            <li class="breadcrumb-item"><a href="#">POS</a></li>
             <li class="breadcrumb-item active" aria-current="page">@yield('title-content')</li>
         </ol>
     </nav>
@@ -33,10 +33,16 @@
                 <li class="p-2">
                     <div class="font-medium">{{ Auth::user()->name }}</div>
                     <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">{{ Auth::user()->role }}</div>
+
                 </li>
                 <li>
                     <hr class="dropdown-divider border-white/[0.08]">
                 </li>
+                @if (Auth::user()->role === 'admin')
+                    <li>
+                        <a href="{{ route('home-admin') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Vào trang quản lý</a>
+                    </li>
+                @endif
                 <li>
                     <a href="#" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Hồ sơ</a>
                 </li>
@@ -46,16 +52,9 @@
                 <li>
                     <a href="#" class="dropdown-item hover:bg-white/5"> <i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
                 </li>
-                @if (Auth::user()->role === 'admin')
-                    <li>
-                        <a href="{{ route('/') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> Vào trang chủ</a>
-                    </li>
-                @endif
                 <li>
                     <hr class="dropdown-divider border-white/[0.08]">
                 </li>
-
-
                 <li>
                     <a class="dropdown-item hover:bg-white/5" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Đăng xuất

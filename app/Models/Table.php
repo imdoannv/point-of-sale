@@ -23,7 +23,7 @@ class Table extends Model
         return $this-> belongsTo(Floor::class, 'floor_id','id');
     }
 
-    public function bills (){
-        return $this->hasMany(Bill::class, 'table_id','id');
+    public function orders (){
+        return $this->hasMany(Order::class, 'table_id','id');
     }
 }
