@@ -22,7 +22,7 @@ class Order extends Model
         return $this->belongsTo(Table::class, 'table_id','id');
     }
 
-    public function order_details(){
-        $this->hasMany(OrderDetail::class,'order_id','id');
+    public function orderDetail(){
+        return $this->hasMany(OrderDetail::class,'order_id','id');
     }
 }

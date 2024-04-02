@@ -27,7 +27,7 @@ class Product extends Model
         return $this->belongsTo(Category::class,'category_id','id');
     }
 
-    public function product_units(){
+    public function productUnits(){
         return $this->belongsTo(ProductUnit::class,'product_unit_id','id');
     }
 
@@ -35,7 +35,7 @@ class Product extends Model
         return $this->belongsTo(Warehouse::class,'warehouse_id','id');
     }
 
-    public function order_details(){
+    public function orderDetails(){
         return $this-> hasMany(OrderDetail::class,'product_id','id');
     }
 

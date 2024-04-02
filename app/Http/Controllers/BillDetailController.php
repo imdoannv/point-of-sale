@@ -27,26 +27,8 @@ class BillDetailController extends Controller
 //    {
 //        $products = Product::all();
 //        $data = BillDetail::query()->latest()->paginate(8);
-//        return view('client.oders.cart',compact('data', 'products'));
+//        return view('client.orders.cart',compact('data', 'products'));
 //    }
-    public function showCart(Request $request)
-    {
-        // Lấy giỏ hàng từ session
-        $cart = $request->session()->get('cart');
-
-        if (is_array($cart)) {
-            // Lấy thông tin chi tiết về các sản phẩm trong giỏ hàng
-            $productIds = array_keys($cart);
-            $products = Product::whereIn('id', $productIds)->get();
-
-            return view('client.oders.cart', compact('products', 'cart'));
-        }
-
-        // Giỏ hàng không tồn tại hoặc rỗng
-        $products = [];
-        $cart = [];
-        return view('client.oders.cart', compact('products', 'cart'));
-    }
     /**
      * Show the form for creating a new resource.
      */
@@ -127,7 +109,24 @@ class BillDetailController extends Controller
         }
     }
 
+    public function showCart(Request $request)
+    {
+        // Lấy giỏ hàng từ session
+        $cart = $request->session()->get('cart');
 
+        if (is_array($cart)) {
+            // Lấy thông tin chi tiết về các sản phẩm trong giỏ hàng
+            $productIds = array_keys($cart);
+            $products = Product::whereIn('id', $productIds)->get();
+
+            return view('client.orders.cart', compact('products', 'cart'));
+        }
+
+        // Giỏ hàng không tồn tại hoặc rỗng
+        $products = [];
+        $cart = [];
+        return view('client.orders.cart', compact('products', 'cart'));
+    }
     public function addToCart(Request $request)
     {
 
@@ -164,13 +163,13 @@ class BillDetailController extends Controller
             $productIds = array_keys($cart);
             $products = Product::whereIn('id', $productIds)->get();
 
-            return view('client.oders.cart', compact('products', 'cart'));
+            return view('client.orders.cart', compact('products', 'cart'));
         }
 
         // Giỏ hàng không tồn tại hoặc rỗng
         $products = [];
         $cart = [];
-        return view('client.oders.cart', compact('products', 'cart'));
+        return view('client.orders.cart', compact('products', 'cart'));
     }
 
     public function removeFromCart(Request $request, $productId)

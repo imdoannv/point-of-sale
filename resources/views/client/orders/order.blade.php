@@ -7,30 +7,14 @@
     <!-- BEGIN: Content -->
     <div class="content">
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+
             <h2 class="text-lg font-medium mr-auto">
-                Đang order với mã hóa đơn: <span class="btn btn-success">{{$orders}}</span>
+                Đang order với mã hóa đơn: <span class="btn btn-success">{{$order_id}}</span>
                 cho bàn <span class="btn btn-success">{{$tables->name}}</span>
             </h2>
+
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#new-order-modal" class="btn btn-primary shadow-md mr-2">New Order</a>
-                <div class="pos-dropdown dropdown ml-auto sm:ml-0">
-                    <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                        <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="chevron-down"></i> </span>
-                    </button>
-                    <div class="pos-dropdown__dropdown-menu dropdown-menu">
-                        <ul class="dropdown-content">
-                            <li>
-                                <a href="#" class="dropdown-item"> <i data-lucide="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">INV-0206020 - Edward Norton</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item"> <i data-lucide="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">INV-0206022 - Robert De Niro</span> </a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item"> <i data-lucide="activity" class="w-4 h-4 mr-2"></i> <span class="truncate">INV-0206021 - Russell Crowe</span> </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <a href="{{route('show-cart',['order_cart_id' => $order_id])}}" data-tw-toggle="modal" data-tw-target="#new-order-modal" class="btn btn-primary shadow-md mr-2">Giỏ hàng</a>
             </div>
         </div>
         <div class="intro-y grid grid-cols-12 gap-5 mt-5">
@@ -61,7 +45,36 @@
                     @endforeach
                 </div>
                 <div class="grid grid-cols-12 gap-5 mt-5 pt-5 border-t">
-                    @yield('product')
+                    @foreach($products as $value)
+                        <a href="#" class="intro-y block col-span-12 sm:col-span-4 2xl:col-span-3">
+                            <div class="box rounded-md p-3 relative zoom-in">
+                                <div class="flex-none relative block before:block before:w-full before:pt-[100%]">
+                                    <div class="absolute top-0 left-0 w-full h-full image-fit">
+                                        @if ($value->image && asset($value->image))
+                                            <img alt="Ảnh đồ ăn" class="rounded-md" src="{{ asset($value->image) }}">
+                                        @else
+                                            <img src="{{ asset('no_image.jpg') }}" alt="" class="rounded-md">
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="block font-medium text-center truncate mt-3">{{$value->name}}</div>
+                                <div class=" text-right">
+                                    <form action="{{ route('carts.store') }}" class="block font-medium text-center truncate mt-3" method="POST">
+                                        @csrf
+                                        @method('post')
+                                        <input type="text" value="{{{$order_id}}}" name="order_id" hidden>
+                                        <input type="text" value="{{$value->id}}" name="product_id" hidden>
+                                        <input type="text" value="1" name="quantity" hidden>
+                                        <input type="text" value="{{$value->price}}" name="price" hidden>
+                                        <button class="btn btn-primary w-32  ">Thêm Giỏ</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </a>
+
+                    @endforeach
                 </div>
             </div>
             <!-- END: Item List -->
@@ -176,68 +189,7 @@
             </div>
             <!-- END: Ticket -->
         </div>
-        <!-- BEGIN: New Order Modal -->
-        <div id="new-order-modal" class="modal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="font-medium text-base mr-auto">
-                            New Order
-                        </h2>
-                    </div>
-                    <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                        <div class="col-span-12">
-                            <label for="pos-form-1" class="form-label">Name</label>
-                            <input id="pos-form-1" type="text" class="form-control flex-1" placeholder="Customer name">
-                        </div>
-                        <div class="col-span-12">
-                            <label for="pos-form-2" class="form-label">Table</label>
-                            <input id="pos-form-2" type="text" class="form-control flex-1" placeholder="Customer table">
-                        </div>
-                        <div class="col-span-12">
-                            <label for="pos-form-3" class="form-label">Number of People</label>
-                            <input id="pos-form-3" type="text" class="form-control flex-1" placeholder="People">
-                        </div>
-                    </div>
-                    <div class="modal-footer text-right">
-                        <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-32 mr-1">Cancel</button>
-                        <button type="button" class="btn btn-primary w-32">Create Ticket</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END: New Order Modal -->
-        <!-- BEGIN: Add Item Modal -->
-        <div id="add-item-modal" class="modal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="font-medium text-base mr-auto">
-                            Root Beer
-                        </h2>
-                    </div>
-                    <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                        <div class="col-span-12">
-                            <label for="pos-form-4" class="form-label">Quantity</label>
-                            <div class="flex mt-2 flex-1">
-                                <button type="button" class="btn w-12 border-slate-200 bg-slate-100 dark:bg-darkmode-700 dark:border-darkmode-500 text-slate-500 mr-1">-</button>
-                                <input id="pos-form-4" type="text" class="form-control w-24 text-center" placeholder="Item quantity" value="2">
-                                <button type="button" class="btn w-12 border-slate-200 bg-slate-100 dark:bg-darkmode-700 dark:border-darkmode-500 text-slate-500 ml-1">+</button>
-                            </div>
-                        </div>
-                        <div class="col-span-12">
-                            <label for="pos-form-5" class="form-label">Notes</label>
-                            <textarea id="pos-form-5" class="form-control w-full mt-2" placeholder="Item notes"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer text-right">
-                        <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                        <button type="button" class="btn btn-primary w-24">Add Item</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END: Add Item Modal -->
     </div>
     <!-- END: Content -->
+
 @endsection

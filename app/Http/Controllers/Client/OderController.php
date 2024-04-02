@@ -35,18 +35,15 @@ class OderController extends Controller
 
 
         // Xử lý truy vấn dữ liệu
-
-
         $orders = Order::with('table')
             ->where('table_id', $id)
             ->whereHas('table', function ($query) {
                 $query->where('status', 'occupied');
             })
             ->get();
+        $order_id = $orders->first()->id;
 
-        $orders = $orders->first()->id;
-//        return view('client.oders.oder',compact('categories'));
-        return view('client.oders.product-detail',compact('categories','products','tables','orders'));
+        return view('client.orders.order',compact('categories','products','tables','order_id'));
     }
 
     /**
@@ -76,7 +73,7 @@ class OderController extends Controller
             ->get();
         $category_id= Category::find($id);
         $products = $category_id->products;
-        return view('client.oders.product-detail',compact('categories','products'));
+        return view('client.orders.order',compact('categories','products'));
     }
 
 
