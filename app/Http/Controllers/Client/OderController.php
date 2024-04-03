@@ -41,7 +41,7 @@ class OderController extends Controller
                 $query->where('status', 'occupied');
             })
             ->get();
-        $order_id = $orders->first()->id;
+        $order_id = $orders->last()->id;
 
         return view('client.orders.order',compact('categories','products','tables','order_id'));
     }

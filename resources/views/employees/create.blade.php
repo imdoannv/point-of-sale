@@ -71,7 +71,6 @@
                                         </div>
                                     </div>
 
-
                                 </div>
                                 <button class="btn btn-primary waves-effect waves-light">Thêm mới</button>
                                 <a href="{{ route('employees.index') }}"

@@ -132,6 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('delete_cart/{id}', [BillDetailController::class, 'destroy'])->name('delete_cart');
 
         Route::resource('carts',OrderDetailController::class);
+        Route::resource('bills',BillController::class);
         Route::get('show-cart',[OrderDetailController::class,'showCart'])->name('show-cart');
 
 //        Route::post('/cart/add', [BillDetailController::class, 'addToCart'])->name('cart.add');

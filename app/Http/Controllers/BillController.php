@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\Customer;
 use App\Models\Discount;
+use App\Models\Order;
 use App\Models\Table;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BillController extends Controller
 {
@@ -37,7 +40,31 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $model = new Bill();
+            $model->fill($request->all());
+            if($request->customer_id == 'customer'){
+                $model->customer_id = null;
+            }
+
+            $model->save();
+
+            $record_order = Order::find($model->order_id);
+            $record_order->status = 'paid';
+            $order_id = $record_order->table_id;
+            $record_order->save();
+
+            $record_table = Table::find($order_id);
+            $record_table->status = 'available';
+            $record_table->save();
+
+            toastr()->success('Thanh toán thành công!','Thành công');
+            return to_route('/');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Thanh toán thất bại!','Thất bại');
+            return back();
+        }
     }
 
     /**

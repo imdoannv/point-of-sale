@@ -29,8 +29,7 @@ class Bill extends Model
     public function discounts(){
         return $this-> belongsTo(Discount::class, 'discount_id','id');
     }
-
-    public function orders(){
+    public function order(){
         return $this-> belongsTo(Order::class,'order_id','id');
     }
 }

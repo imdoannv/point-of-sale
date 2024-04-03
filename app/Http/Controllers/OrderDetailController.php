@@ -60,7 +60,7 @@ class OrderDetailController extends Controller
         $order_details = OrderDetail::where('order_id', $order_cart_id)->get();
         $products = Product::all();
         $customers = Customer::all();
-        return view('client.orders.cart',compact('products','order_details','customers'));
+        return view('client.orders.cart',compact('products','order_details','customers','order_cart_id'));
     }
 
     /**
@@ -82,8 +82,17 @@ class OrderDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderDetail $orderDetail)
+    public function destroy($id)
     {
-        //
+        try {
+            $data = OrderDetail::where('id', $id);
+            $data->forceDelete();
+            toastr()->success('Xóa sản phẩm khỏi giỏ hàng thành công!','Thành công');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Xóa sản phẩm thất bại!','Thất bại');
+            return back();
+        }
     }
 }
