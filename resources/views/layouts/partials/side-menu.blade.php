@@ -6,6 +6,18 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
 
+        {{--Thống kê--}}
+        <li>
+            <a href="{{route('dashboard')}}" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                <div class="side-menu__title">
+                    Dashboard
+                </div>
+            </a>
+        </li>
+
+        <li class="side-nav__devider my-6"></li>
+
         {{--Quản lý tài khoản--}}
         <li>
             <a href="javascript:;" class="side-menu">

@@ -40,7 +40,7 @@
                 </li>
                 @if (Auth::user()->role === 'admin')
                     <li>
-                        <a href="{{ route('home-admin') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Vào trang quản lý</a>
+                        <a href="{{ route('dashboard') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Vào trang quản lý</a>
                     </li>
                 @endif
                 <li>

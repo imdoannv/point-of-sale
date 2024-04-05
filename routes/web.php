@@ -17,6 +17,8 @@ use App\Http\Controllers\BillDetailController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OderController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/home-admin', function () {
             return view('layouts.home');
         })->middleware(['auth', 'verified'])->name('home-admin');
+
+        Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
         // Quản lý tài khoản
         Route::resource('users', UserController::class);
@@ -140,7 +144,7 @@ Route::middleware('auth')->group(function () {
 //        Route::delete('/cart/remove/{productId}', [BillDetailController::class, 'removeFromCart'])->name('cart.remove');
 
 //        Làm lại
-        Route::post('oders-add',[\App\Http\Controllers\OrderController::class,'store'])->name('order-add');
+        Route::post('orders-add',[\App\Http\Controllers\OrderController::class,'store'])->name('order-add');
 
 
     });
