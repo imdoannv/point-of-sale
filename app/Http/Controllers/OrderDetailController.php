@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class OrderDetailController extends Controller
@@ -60,7 +62,18 @@ class OrderDetailController extends Controller
         $order_details = OrderDetail::where('order_id', $order_cart_id)->get();
         $products = Product::all();
         $customers = Customer::all();
-        return view('client.orders.cart',compact('products','order_details','customers','order_cart_id'));
+
+        // Danh sách bàn muốn gộp để thanh toán
+        $tables = DB::table('tables')
+            ->where('status', '=', 'occupied')
+            ->whereNotIn('id', function($query) use ($order_cart_id) {
+                $query->select('table_id')
+                    ->from('orders')
+                    ->where('id', '=', $order_cart_id);
+            })
+            ->get();
+
+        return view('client.orders.cart',compact('products','order_details','customers','order_cart_id','tables'));
     }
 
     /**

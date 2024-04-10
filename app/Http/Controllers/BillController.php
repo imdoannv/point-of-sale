@@ -96,6 +96,6 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        //
+
     }
 }

@@ -96,6 +96,25 @@
                                 </div>
                             </form>
                         </div>
+
+                        <div class="box p-5 mt-5">
+
+                            <div class="flex mt-4">
+                                <div class="mr-auto">Gộp thanh toán sang bàn: </div>
+
+                                <div class="font-medium text-base">
+                                    <select class="form-select" name="table_id">
+                                        <option value="order" class="form-input">Vui lòng chọn bàn</option>
+                                        @foreach ($tables as $value)
+                                            <option value="{{ $value->id }}" class="form-input">{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="text" value="{{$order_cart_id}}" hidden>
+
+                        </div>
                     </div>
                 </div>
                 <!-- END: Ticket -->
@@ -103,6 +122,16 @@
             <div class="mx-auto text-center my-5">
                 <p class="text-center btn btn-danger">Giỏ hàng trống</p>
                 <a href="#" class="text-center btn btn-primary" onclick="goBack()">Tiếp tục chọn món</a>
+
+                <br> <br>
+                <form action="{{route('deleteOrder',$order_cart_id)}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger text-center"
+                            onclick="return confirm('Bạn chắc chắn muốn hủy?')">
+                        <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Hủy Đặt Bàn
+                    </button>
+                </form>
             </div>
         @endif
     </div>

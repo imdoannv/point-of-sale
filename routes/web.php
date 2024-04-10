@@ -18,6 +18,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,6 +137,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('delete_cart/{id}', [BillDetailController::class, 'destroy'])->name('delete_cart');
 
         Route::resource('carts',OrderDetailController::class);
+
+        Route::delete('deleteOrder/{id}',[OrderController::class,'deleteOrder'])->name('deleteOrder');
+
         Route::resource('bills',BillController::class);
         Route::get('show-cart',[OrderDetailController::class,'showCart'])->name('show-cart');
 

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +16,10 @@ class DashboardController extends Controller
     public function index()
     {
         $countUser = User::all()->count();
-        return view('dashboard.thongke',compact('countUser'));
+        $countProduct = Product::all()->count();
+        $countTable  = Table::all()->count();
+        $countOrder = Order::all()->count();
+        return view('dashboard.thongke',compact('countUser','countProduct','countTable','countOrder'));
     }
 
     /**

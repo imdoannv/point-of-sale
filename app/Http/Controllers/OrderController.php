@@ -105,4 +105,26 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function deleteOrder($order_cart_id){
+        try {
+
+            $data = Order::where('id', $order_cart_id);
+
+            $record_order = Order::find($order_cart_id);
+            $record_table = Table::find($record_order->table_id);
+            $record_table->status = 'available';
+
+            $record_table->save();
+            $data->forceDelete();
+
+
+            toastr()->success('Hủy đặt bàn thành công!','Thành công');
+            return to_route('/');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Hủy đặt bàn thất bại!','Thất bại');
+            return back();
+        }
+    }
 }

@@ -37,8 +37,8 @@
                                     <div class="report-box__indicator bg-danger tooltip cursor-pointer" title="2% Lower than last month"> 2% <i data-lucide="chevron-down" class="w-4 h-4 ml-0.5"></i> </div>
                                 </div>
                             </div>
-                            <div class="text-3xl font-medium leading-8 mt-6">3.721</div>
-                            <div class="text-base text-slate-500 mt-1">New Orders</div>
+                            <div class="text-3xl font-medium leading-8 mt-6">{{number_format($countOrder)}}</div>
+                            <div class="text-base text-slate-500 mt-1">Total Orders</div>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                     <div class="report-box__indicator bg-success tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>
                                 </div>
                             </div>
-                            <div class="text-3xl font-medium leading-8 mt-6">2.149</div>
+                            <div class="text-3xl font-medium leading-8 mt-6">{{number_format($countProduct)}}</div>
                             <div class="text-base text-slate-500 mt-1">Total Products</div>
                         </div>
                     </div>
