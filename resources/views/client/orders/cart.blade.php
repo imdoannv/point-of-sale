@@ -8,6 +8,15 @@
 
         @if (count($order_details) > 0)
             <a href="#" class="text-center btn btn-primary my-4" onclick="goBack()">Tiếp tục chọn món</a>
+{{--            <a href="" class="text-center btn btn-danger ml-3 my-4">Hủy Bàn</a>--}}
+            <form action="{{route('deleteOrderFull',$order_cart_id)}}" method="POST">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger my-4"
+                        onclick="return confirm('Bạn chắc chắn muốn hủy?')">
+                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Hủy Đặt Bàn
+                </button>
+            </form>
 
         <table class="table table-report -mt-2" id="myTable">
             <thead>
@@ -112,7 +121,7 @@
                                         </select>
                                     </div>
 
-                                    <button class="btn btn-success">Chuyển thanh toán</button>
+                                    <button class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn gộp?')">Chuyển thanh toán</button>
                                 </div>
 
 {{--                                <input type="text" value="{{$order_cart_id}}" name="id" hidden>--}}

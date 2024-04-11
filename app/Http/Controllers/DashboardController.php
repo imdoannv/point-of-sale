@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Table;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -19,7 +21,25 @@ class DashboardController extends Controller
         $countProduct = Product::all()->count();
         $countTable  = Table::all()->count();
         $countOrder = Order::all()->count();
-        return view('dashboard.thongke',compact('countUser','countProduct','countTable','countOrder'));
+        $revenue_service_today = Bill::query()->whereDate('created_at', today())->sum('total_price');
+
+        $currentMonth = Carbon::now()->month;
+        $revenue_service_current_month = Bill::query()
+            ->whereMonth('created_at', $currentMonth)
+            ->sum('total_price');
+
+        $previousMonth = Carbon::now()->subMonth()->month;
+
+        $revenue_service_previous_month = Bill::query()
+            ->whereMonth('created_at', $previousMonth)
+            ->sum('total_price');
+
+        return view('dashboard.thongke',compact('countUser','countProduct','countTable','countOrder','revenue_service_today'
+        ,'revenue_service_current_month','revenue_service_previous_month'));
+    }
+
+    public function exportRevenue(){
+
     }
 
     /**

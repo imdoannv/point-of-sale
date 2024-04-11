@@ -106,6 +106,27 @@ class OrderController extends Controller
         //
     }
 
+    public function deleteOrderFull($order_cart_id){
+        try {
+            $order = Order::findOrFail($order_cart_id);
+
+            $record_order = Order::find($order_cart_id);
+            $record_table = Table::find($record_order->table_id);
+            $record_table->status = 'available';
+            $record_table->save();
+
+            $order->orderDetail()->delete(); // Xóa các hàng con từ bảng "order_details"
+            $order->delete(); // Xóa hàng cha từ bảng "orders"
+
+            toastr()->success('Hủy đặt bàn thành công!','Thành công');
+            return to_route('/');
+        } catch (\Exception $exception) {
+                Log::error($exception->getMessage());
+                toastr()->error('Hủy đặt bàn thất bại!','Thất bại');
+                return back();
+            }
+    }
+
     public function deleteOrder($order_cart_id){
         try {
 
@@ -114,8 +135,8 @@ class OrderController extends Controller
             $record_order = Order::find($order_cart_id);
             $record_table = Table::find($record_order->table_id);
             $record_table->status = 'available';
-
             $record_table->save();
+
             $data->forceDelete();
 
 

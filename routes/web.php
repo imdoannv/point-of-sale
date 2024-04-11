@@ -53,11 +53,14 @@ Route::middleware('auth')->group(function () {
 
         Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
+
         // Quản lý tài khoản
         Route::resource('users', UserController::class);
         Route::get('users-deleted', [UserController::class, 'deleted'])->name('users-deleted'); // Thùng rác
         Route::delete('users-permanently/{id}', [UserController::class, 'permanentlyDelete'])->name('users-permanently-delete'); //Xóa vĩnh viên
         Route::get('users-restore/{id}', [UserController::class, 'restore'])->name('users-restore');
+        Route::get('export', [\App\Http\Controllers\ExportsController::class, 'export'])->name('export'); // Xuất file
+
 
         // Quản lý nhân viên
         Route::resource('employees', EmployeeController::class);
@@ -136,9 +139,12 @@ Route::middleware('auth')->group(function () {
 //        Route::get('cart', [BillDetailController::class, 'showCart'])->name('cart');
         Route::delete('delete_cart/{id}', [BillDetailController::class, 'destroy'])->name('delete_cart');
 
+
         Route::resource('carts',OrderDetailController::class);
 
         Route::delete('deleteOrder/{id}',[OrderController::class,'deleteOrder'])->name('deleteOrder');
+        Route::delete('deleteOrderFull/{id}',[OrderController::class,'deleteOrderFull'])->name('deleteOrderFull');
+
 
         Route::resource('bills',BillController::class);
         Route::get('show-cart',[OrderDetailController::class,'showCart'])->name('show-cart');

@@ -14,6 +14,7 @@
                                     <div class="mb-2 d-flex gap-1 ">
                                         <a class="btn btn-success" href="{{ route('users.create') }}">Thêm mới</a>
                                         <a class="btn btn-danger" href="{{ route('users-deleted') }}">Thùng rác</a>
+                                        <a class="btn btn-pending" href="{{ route('export') }}">Xuất báo cáo</a>
                                     </div>
                                     <table id="tech-companies-1" class="table mb-0">
                                         <thead  class="text-center">

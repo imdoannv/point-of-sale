@@ -88,26 +88,23 @@
                 <div class="flex flex-col md:flex-row md:items-center">
                     <div class="flex">
                         <div>
-                            <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">$15,000</div>
-                            <div class="mt-0.5 text-slate-500">This Month</div>
+                            <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">{{number_format($revenue_service_today)}} VND</div>
+                            <div class="mt-0.5 text-slate-500">This Day</div>
                         </div>
                         <div class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5"></div>
                         <div>
-                            <div class="text-slate-500 text-lg xl:text-xl font-medium">$10,000</div>
-                            <div class="mt-0.5 text-slate-500">Last Month</div>
+                            <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">{{number_format($revenue_service_current_month)}} VND</div>
+                            <div class="mt-0.5 text-slate-500">This Month</div>
                         </div>
+                        <div class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5"></div>
+                            <div>
+                                <div class="text-slate-500 text-lg xl:text-xl font-medium">{{number_format($revenue_service_previous_month)}} VND</div>
+                                <div class="mt-0.5 text-slate-500">Last Month</div>
+                            </div>
                     </div>
                     <div class="dropdown md:ml-auto mt-5 md:mt-0">
-                        <button class="dropdown-toggle btn btn-outline-secondary font-normal" aria-expanded="false" data-tw-toggle="dropdown"> Filter by Category <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i> </button>
-                        <div class="dropdown-menu w-40">
-                            <ul class="dropdown-content overflow-y-auto h-32">
-                                <li><a href="#" class="dropdown-item">PC & Laptop</a></li>
-                                <li><a href="#" class="dropdown-item">Smartphone</a></li>
-                                <li><a href="#" class="dropdown-item">Electronic</a></li>
-                                <li><a href="#" class="dropdown-item">Photography</a></li>
-                                <li><a href="#" class="dropdown-item">Sport</a></li>
-                            </ul>
-                        </div>
+{{--                        <a class="btn btn-info" href="{{ route('export') }}">Xuất báo cáo</a>--}}
+{{--                        <a class="btn btn-info" href="#">Export</a>--}}
                     </div>
                 </div>
                 <div class="report-chart">
