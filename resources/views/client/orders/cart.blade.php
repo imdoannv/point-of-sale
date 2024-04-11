@@ -98,22 +98,27 @@
                         </div>
 
                         <div class="box p-5 mt-5">
+                            <form action="{{ route('orders',$order_cart_id) }}" method="POST" >
+                                @csrf
+                                @method('put')
+                                <div class="flex mt-4 justify-center">
+                                    <div class="mr-auto">Gộp thanh toán sang bàn: </div>
 
-                            <div class="flex mt-4">
-                                <div class="mr-auto">Gộp thanh toán sang bàn: </div>
+                                    <div class="font-medium text-base">
+                                        <select class="form-select" name="order_id">
+                                            @foreach ($orders as $value)
+                                                <option value="{{ $value->id }}" class="form-input" >{{ $value->table->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                <div class="font-medium text-base">
-                                    <select class="form-select" name="table_id">
-                                        <option value="order" class="form-input">Vui lòng chọn bàn</option>
-                                        @foreach ($tables as $value)
-                                            <option value="{{ $value->id }}" class="form-input">{{ $value->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <button class="btn btn-success">Chuyển thanh toán</button>
                                 </div>
-                            </div>
 
-                            <input type="text" value="{{$order_cart_id}}" hidden>
+{{--                                <input type="text" value="{{$order_cart_id}}" name="id" hidden>--}}
 
+
+                            </form>
                         </div>
                     </div>
                 </div>

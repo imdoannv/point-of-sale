@@ -126,7 +126,7 @@ Route::middleware('auth')->group(function () {
         Route::get('show-table/{id}', [HomeController::class, 'show'])->name('show-table');
 
         // Chọn đồ ăn
-        Route::get('order', [OderController::class, 'index'])->name('order');
+        Route::get('orders', [OderController::class, 'index'])->name('order');
         Route::get('show-food/{id}', [OderController::class, 'show'])->name('show-food');
 
         Route::post('post-bill-details', [BillDetailController::class,'store'])->name('post-bill-details');
@@ -146,6 +146,7 @@ Route::middleware('auth')->group(function () {
 //        Route::post('/cart/add', [BillDetailController::class, 'addToCart'])->name('cart.add');
 //        Route::get('/cart', [BillDetailController::class, 'showCart'])->name('cart.show');
 //        Route::delete('/cart/remove/{productId}', [BillDetailController::class, 'removeFromCart'])->name('cart.remove');
+        Route::put('orders/{id}', [OderController::class, 'update'])->name('orders');
 
 //        Làm lại
         Route::post('orders-add',[\App\Http\Controllers\OrderController::class,'store'])->name('order-add');

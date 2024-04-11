@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Table;
@@ -60,20 +61,16 @@ class OrderDetailController extends Controller
     {
         $order_cart_id = $request->input('order_cart_id'); // Lấy giá trị của tham số 'id' từ URL
         $order_details = OrderDetail::where('order_id', $order_cart_id)->get();
+        $order_table_id = Order::where('status','pending')->where('id',$order_cart_id)->value('id');
         $products = Product::all();
         $customers = Customer::all();
 
-        // Danh sách bàn muốn gộp để thanh toán
-        $tables = DB::table('tables')
-            ->where('status', '=', 'occupied')
-            ->whereNotIn('id', function($query) use ($order_cart_id) {
-                $query->select('table_id')
-                    ->from('orders')
-                    ->where('id', '=', $order_cart_id);
-            })
+        $orders = Order::where('status', 'pending')
+            ->where('id', '!=', $order_table_id)
             ->get();
 
-        return view('client.orders.cart',compact('products','order_details','customers','order_cart_id','tables'));
+
+        return view('client.orders.cart',compact('products','order_details','customers','order_cart_id','orders'));
     }
 
     /**

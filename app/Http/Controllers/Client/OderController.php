@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OderController extends Controller
 {
@@ -91,7 +93,41 @@ class OderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        try {
+            $order_id_new = $request->order_id;
+
+            $order = Order::find($id);
+
+            if ($order) {
+                $orderDetails = OrderDetail::whereHas('orders', function ($query) use ($id) {
+                    $query->where('id', $id);
+                })->get();
+
+                foreach ($orderDetails as $value) {
+                    $value->order_id = $order_id_new;
+                    $value->save();
+                }
+            }
+
+//          Start  Xóa bàn vì đã gộp
+            $data = Order::where('id', $id);
+
+            $record_order = Order::find($id);
+            $record_table = Table::find($record_order->table_id);
+            $record_table->status = 'available';
+
+            $record_table->save();
+            $data->forceDelete();
+//          End  Xóa bàn vì đã gộp
+
+            toastr()->success('Chuyến hóa đơn thanh toán thành công!','Thành công');
+            return to_route('/');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            toastr()->error('Chuyến hóa đơn thanh toán thất bại!','Thất Bại');
+            return back();
+        }
     }
 
     /**
