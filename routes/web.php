@@ -20,6 +20,7 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,10 +134,7 @@ Route::middleware('auth')->group(function () {
         Route::get('show-food/{id}', [OderController::class, 'show'])->name('show-food');
 
         Route::post('post-bill-details', [BillDetailController::class,'store'])->name('post-bill-details');
-//        Route::get('cart', [BillDetailController::class,'cart'])->name('cart');
 
-
-//        Route::get('cart', [BillDetailController::class, 'showCart'])->name('cart');
         Route::delete('delete_cart/{id}', [BillDetailController::class, 'destroy'])->name('delete_cart');
 
 
@@ -149,9 +147,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('bills',BillController::class);
         Route::get('show-cart',[OrderDetailController::class,'showCart'])->name('show-cart');
 
-//        Route::post('/cart/add', [BillDetailController::class, 'addToCart'])->name('cart.add');
-//        Route::get('/cart', [BillDetailController::class, 'showCart'])->name('cart.show');
-//        Route::delete('/cart/remove/{productId}', [BillDetailController::class, 'removeFromCart'])->name('cart.remove');
         Route::put('orders/{id}', [OderController::class, 'update'])->name('orders');
 
 //        Làm lại

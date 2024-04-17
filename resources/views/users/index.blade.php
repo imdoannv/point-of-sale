@@ -46,7 +46,9 @@
                                                     @if($value->role == 'superadmin')
                                                         Quản trị viên
                                                     @elseif($value->role == 'admin')
-                                                        Nhân viên
+                                                        Nhân viên quản lý
+                                                    @elseif($value->role == 'employee')
+                                                        Nhân viên bán hàng
                                                     @else
                                                         {{ $value->role }}
                                                     @endif

@@ -139,7 +139,6 @@ class OrderController extends Controller
 
             $data->forceDelete();
 
-
             toastr()->success('Hủy đặt bàn thành công!','Thành công');
             return to_route('/');
         } catch (\Exception $exception) {
